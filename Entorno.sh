@@ -74,41 +74,44 @@ else cat /etc/os-release | grep -q "ID=archlinux";
   echo "Nos Ubicaremos en el directorio de Descargas"
   cd $HOME/Descargas/
   sleep 2 
-  sudo $installA --noconfirm bspwm polybar sxhkd picom kitty ranger rofi zsh zsh-syntax-highlighting zsh-autosuggestions man-db mlocate ttf-font-awesome zsh-autosuggestions bat firejail flameshot neofetch feh nvim 7zip xorg-xrandr caja xorg-xinput
+  sudo $installA --noconfirm bspwm polybar sxhkd picom kitty ranger rofi zsh zsh-syntax-highlighting zsh-autosuggestions man-db mlocate ttf-font-awesome zsh-autosuggestions bat firejail flameshot neofetch feh nvim 7zip xorg-xrandr caja xorg-xinput lsd
   sleep 1
   git clone https://github.com/VaughnValle/blue-sky.git
   sudo cp blue-sky/polybar/fonts/* /usr/share/fonts/truetype/.
   rm -rf blue-sky
   wget https://github.com/microsoft/cascadia-code/releases/download/v2407.24/CascadiaCode-2407.24.zip
-  sudo mv CascadiaCode-2407.24.zip /usr/share/fonts/.
-  sudo 7z x /usr/share/fonts/CascadiaCode-2407.24.zip
+  sudo mv 'CascadiaCode-2407.24.zip /usr/share/fonts/.'
+  sudo 7z x '/usr/share/fonts/CascadiaCode-2407.24.zip'
   wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Hack.zip
   sudo mv Hack.zip /usr/share/fonts/.
   sudo 7z x /usr/share/fonts/Hack.zip
   fc-cache -v
   git clone https://github.com/4akatun/Working-environment.git
   git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
+  sleep 5
   git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
   git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ~/.powerlevel10k
   sudo mkdir /usr/share/zsh/.pluginszsh
   cd $(find / -type d -name Working-environment 2>/dev/null)
-  mv backupEntorno/bin $HOME/.config/.
-  mv backupEntorno/bspwm $HOME/.config/.
-  mv backupEntorno/kitty $HOME/.config/.
-  mv backupEntorno/nvim $HOME/.config/.
-  mv backupEntorno/picom $HOME/.config/.
-  mv backupEntorno/polybar $HOME/.config/.
-  mv backupEntorno/sxhkd $HOME/.config/.
-  mv backupEntorno/.pluginszsh/sudo.plugins.zsh /usr/share/zsh/.pluginszsh/.
-  mv backupEntorno/.zshrc $HOME/.
-  mv backupEntorno/.p10k.zsh $HOME/.
-  mv backupEntorno/nord.rasi /usr/share/rofi/themes/.
+  mkdir ~/wallpaper/
+  cp 'Entorno-img/1345403.jpeg ~/wallpaper/.'
+  cp -r backupEntorno/bin $HOME/.config/.
+  cp -r backupEntorno/bspwm $HOME/.config/.
+  cp -r backupEntorno/kitty $HOME/.config/.
+  cp -r backupEntorno/picom $HOME/.config/.
+  cp -r backupEntorno/polybar $HOME/.config/.
+  cp -r backupEntorno/sxhkd $HOME/.config/.
+  sudo cp -r backupEntorno/.pluginszsh/sudo.plugin.zsh /usr/share/zsh/.pluginszsh/.
+  cp  backupEntorno/.zshrc $HOME/.
+  cp  backupEntorno/.p10k.zsh $HOME/.
+  sudo cp backupEntorno/nord.rasi /usr/share/rofi/themes/.
   
   sudo usermod -s $(which zsh) $(whoami)
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install
-sudo git clone --depth 1 https://github.com/junegunn/fzf.git /root/.fzf
-/root/.fzf/install
+  sudo git clone --depth 1 https://github.com/junegunn/fzf.git 
+  sudo /root/.fzf
+  sudo /root/.fzf/install
   sleep 3
   cd 
   rm -rf ~/Descargas/Working-environment
