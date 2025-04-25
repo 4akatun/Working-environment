@@ -15,7 +15,7 @@ installA='pacman -S'
 
 # Comprobacion de SO
 if cat /etc/os-release | grep -q '^ID=debian'; then
-  echo -e "\033[32m✓\033[0m Sistema operativo basado en debian"
+  echo -e "\033[32m✓\033[0m Sistema operativo basado en $(cat /etc/os-release | grep -i '^ID$=' | tr '=' ' ' | awk $'{print $2}')"
   sleep 1
   sudo $updateD
   echo "Comenzamos con la instalacion de todo lo necesario para un entorno de trabajo basao en BSPWN y POLYBAR para: $(cat /etc/os-release | grep -i '^ID$=' | tr '=' ' ' | awk $'{print $2}')"
@@ -24,12 +24,17 @@ if cat /etc/os-release | grep -q '^ID=debian'; then
   echo "Nos Ubicaremos en el directorio de Descargas"
   cd $HOME/Descargas/
   sleep 2 
-  sudo $installD --noconfirm bspwm polybar sxhkd picom kitty ranger rofi zsh zsh-syntax-highlighting man mlocate xwallpapaer ttf-font-awesome zsh-autosuggestions bat firejail flameshot neotetch caido
+  sudo $installD --noconfirm bspwm polybar sxhkd picom kitty ranger rofi zsh zsh-autosuggestions zsh-syntax-highlighting man-db mlocate ttf-font-awesome bat firejail flameshot feh neotetch caido
   sleep 1
+  wget https://github.com/microsoft/cascadia-code/releases/download/v2407.24/CascadiaCode-2407.24.zip
+  sudo mv CascadiaCode-2407.24.zip /usr/share/fonts/ttf/.
+  sudo 7z x /usr/share/fonts/ttf/CascadiaCode-2407.24.zip
+  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Hack.zip
+  sudo mv Hack.zip /usr/share/fonts/ttf/.
+  sudo 7z x /usr/share/fonts/ttf/Hack.zip
+  fc-cache -v
   git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
-  mv .oh-my-zsh $HOME/.
-  git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ~/powerlevel10k
-  mv powerlevel10k $HOME/.powerlevel10k
+  git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ~/.powerlevel10k
   sudo mkdir /usr/share/zsh/.pluginszsh
   cd $(find / -type d -name Working-environment 2>/dev/null)
   mv backupEntorno/bin $HOME/.config/.
@@ -46,13 +51,20 @@ if cat /etc/os-release | grep -q '^ID=debian'; then
   mv backupEntorno/.p10k.zsh $HOME/.
   mv backupEntorno/nord.rasi /usr/share/rofi/themes/.
   sudo usermod -s $(which zsh) $(whoami)
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+sudo git clone --depth 1 https://github.com/junegunn/fzf.git /root/.fzf
+/root/.fzf/install
   sleep 3
+  cd 
+  rm -rf ~/Descargas/Working-environment
   echo -e "\033[32m✓\033[0m Todo esta perfectamente INSTALADO es hora de resetear a la pantalla de inicio elegir BSPWM y a disfritar del entorno"
   sleep 3
   kill -9 -1
 
+
 else cat /etc/os-release | grep -q "ID=archlinux";
-  echo -e "\033[32m✓\033[0m Sistema operativo basado en archlinux"
+  echo -e "\033[32m✓\033[0m Sistema operativo basado en $(cat /etc/os-release | grep -i '^ID$=' | tr '=' ' ' | awk $'{print $2}')"
   sleep 1
   sudo $updateA
 
@@ -62,12 +74,19 @@ else cat /etc/os-release | grep -q "ID=archlinux";
   echo "Nos Ubicaremos en el directorio de Descargas"
   cd $HOME/Descargas/
   sleep 2 
-  sudo $installA --noconfirm bspwm polybar sxhkd picom kitty ranger rofi zsh zsh-syntax-highlighting man mlocate xwallpapaer ttf-font-awesome zsh-autosuggestions bat firejail flameshot neotetch caido
+  sudo $installA --noconfirm bspwm polybar sxhkd picom kitty ranger rofi zsh zsh-syntax-highlighting zsh-autosuggestions man-db mlocate xwallpapaer ttf-font-awesome zsh-autosuggestions bat firejail flameshot neotetch feh nvim 7z
   sleep 1
+  wget https://github.com/microsoft/cascadia-code/releases/download/v2407.24/CascadiaCode-2407.24.zip
+  sudo mv CascadiaCode-2407.24.zip /usr/share/fonts/ttf/.
+  sudo 7z x /usr/share/fonts/ttf/CascadiaCode-2407.24.zip
+  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Hack.zip
+  sudo mv Hack.zip /usr/share/fonts/ttf/.
+  sudo 7z x /usr/share/fonts/ttf/Hack.zip
+  fc-cache -v
+  git clone https://github.com/4akatun/Working-environment.git
+  git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
   git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
-  mv .oh-my-zsh $HOME/.
-  git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ~/powerlevel10k
-  mv powerlevel10k $HOME/.powerlevel10k
+  git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ~/.powerlevel10k
   sudo mkdir /usr/share/zsh/.pluginszsh
   cd $(find / -type d -name Working-environment 2>/dev/null)
   mv backupEntorno/bin $HOME/.config/.
@@ -77,14 +96,19 @@ else cat /etc/os-release | grep -q "ID=archlinux";
   mv backupEntorno/picom $HOME/.config/.
   mv backupEntorno/polybar $HOME/.config/.
   mv backupEntorno/sxhkd $HOME/.config/.
-  mv backupEntorno/.pluginszsh/zsh-autosuggestions /usr/share/zsh/.pluginszsh/.
-  mv backupEntorno/.pluginszsh/zsh-syntax-highlighting /usr/share/zsh/.pluginszsh/.
   mv backupEntorno/.pluginszsh/sudo.plugins.zsh /usr/share/zsh/.pluginszsh/.
   mv backupEntorno/.zshrc $HOME/.
   mv backupEntorno/.p10k.zsh $HOME/.
   mv backupEntorno/nord.rasi /usr/share/rofi/themes/.
+  
   sudo usermod -s $(which zsh) $(whoami)
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install
+sudo git clone --depth 1 https://github.com/junegunn/fzf.git /root/.fzf
+/root/.fzf/install
   sleep 3
+  cd 
+  rm -rf ~/Descargas/Working-environment
   echo -e "\033[32m✓\033[0m Todo esta perfectamente INSTALADO es hora de resetear a la pantalla de inicio elegir BSPWM y a disfritar del entorno"
   sleep 3
   kill -9 -1
