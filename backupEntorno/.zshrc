@@ -69,9 +69,9 @@ alias icat='kitty +kitten icat'
 #            PLUGINS                  # 
 #######################################
 plugins=(git ruby colorize compleat colored-man macos lighthouse per-directory-history)
-source /usr/share/zsh/.pluginszsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/.pluginszsh/sudo.plugin.zsh
-source /usr/share/zsh/.pluginszsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
 
 #######################################
 #          FUNCTIONS                  # 
