@@ -9,4 +9,4 @@ you like it and tweak it to your personal taste.</h2>
 
 ![Entorono](/Entorno-img/Clean-Desktop.png)
 
-![Ventanas](/Entorno-img/Desktop-formant.png)
+![Ventanas](/Entorno-img/Desktop-format.png)
