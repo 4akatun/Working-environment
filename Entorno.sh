@@ -74,14 +74,17 @@ else cat /etc/os-release | grep -q "ID=archlinux";
   echo "Nos Ubicaremos en el directorio de Descargas"
   cd $HOME/Descargas/
   sleep 2 
-  sudo $installA --noconfirm bspwm polybar sxhkd picom kitty ranger rofi zsh zsh-syntax-highlighting zsh-autosuggestions man-db mlocate xwallpapaer ttf-font-awesome zsh-autosuggestions bat firejail flameshot neotetch feh nvim 7z
+  sudo $installA --noconfirm bspwm polybar sxhkd picom kitty ranger rofi zsh zsh-syntax-highlighting zsh-autosuggestions man-db mlocate ttf-font-awesome zsh-autosuggestions bat firejail flameshot neofetch feh nvim 7zip xorg-xrandr caja xorg-xinput
   sleep 1
+  git clone https://github.com/VaughnValle/blue-sky.git
+  sudo cp blue-sky/polybar/fonts/* /usr/share/fonts/truetype/.
+  rm -rf blue-sky
   wget https://github.com/microsoft/cascadia-code/releases/download/v2407.24/CascadiaCode-2407.24.zip
-  sudo mv CascadiaCode-2407.24.zip /usr/share/fonts/ttf/.
-  sudo 7z x /usr/share/fonts/ttf/CascadiaCode-2407.24.zip
+  sudo mv CascadiaCode-2407.24.zip /usr/share/fonts/.
+  sudo 7z x /usr/share/fonts/CascadiaCode-2407.24.zip
   wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Hack.zip
-  sudo mv Hack.zip /usr/share/fonts/ttf/.
-  sudo 7z x /usr/share/fonts/ttf/Hack.zip
+  sudo mv Hack.zip /usr/share/fonts/.
+  sudo 7z x /usr/share/fonts/Hack.zip
   fc-cache -v
   git clone https://github.com/4akatun/Working-environment.git
   git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
