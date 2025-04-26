@@ -78,13 +78,13 @@ else cat /etc/os-release | grep -q "ID=archlinux";
   git clone https://github.com/VaughnValle/blue-sky.git
   sudo cp blue-sky/polybar/fonts/* /usr/share/fonts/truetype/.
   rm -rf blue-sky
-  wget https://github.com/microsoft/cascadia-code/releases/download/v2407.24/CascadiaCode-2407.24.zip
-  sudo mv CascadiaCode-2407.24.zip /usr/share/fonts/.
-  sudo 7z x /usr/share/fonts/CascadiaCode-2407.24.zip
+  pushd /usr/share/fonts/
+  sudo wget https://github.com/microsoft/cascadia-code/releases/download/v2407.24/CascadiaCode-2407.24.zip
+  sudo 7z x CascadiaCode-2407.24.zip
   sleep 1
-  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Hack.zip
-  sudo mv Hack.zip /usr/share/fonts/.
-  sudo 7z x /usr/share/fonts/Hack.zip
+  sudo wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Hack.zip
+  sudo 7z x Hack.zip
+  popd
   fc-cache -v
   git clone https://github.com/4akatun/Working-environment.git
   git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
@@ -120,9 +120,9 @@ else cat /etc/os-release | grep -q "ID=archlinux";
   sudo /root/.fzf/install
   sleep 2
   cd 
-  rm -rf ~/Descargas/Working-environment
+  rm -rf ~/Descargas/*
   echo -e "\033[32m✓\033[0m Todo esta perfectamente INSTALADO es hora de resetear a la pantalla de inicio elegir BSPWM y a disfritar del entorno"
-  sleep 3
-  kill -9 -1
+  sleep 1
+  reboot
 fi
 
