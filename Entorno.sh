@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Variables
-updateD='sudo apt update'
+updateD='sudo apt update -y'
 updateA='pacman -Syu'
-installD='sudo apt install'
+installD='sudo apt install -y'
 installA='pacman -S'
 
 # Comprobar si se ejecuta como root
@@ -24,43 +24,54 @@ if cat /etc/os-release | grep -q '^ID=debian'; then
   echo "Nos Ubicaremos en el directorio de Descargas"
   cd $HOME/Descargas/
   sleep 2 
-  sudo $installD --noconfirm bspwm polybar sxhkd picom kitty ranger rofi zsh zsh-autosuggestions zsh-syntax-highlighting man-db mlocate ttf-font-awesome bat lsd firejail flameshot feh neotetch caido
+  sudo $installD --noconfirm bspwm polybar sxhkd picom kitty ranger rofi zsh zsh-autosuggestions zsh-syntax-highlighting man-db mlocate ttf-font-awesome bat lsd firejail flameshot feh neotetch caido neovim
   sleep 1
-  wget https://github.com/microsoft/cascadia-code/releases/download/v2407.24/CascadiaCode-2407.24.zip
-  sudo mv CascadiaCode-2407.24.zip /usr/share/fonts/ttf/.
-  sudo 7z x /usr/share/fonts/ttf/CascadiaCode-2407.24.zip
-  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Hack.zip
-  sudo mv Hack.zip /usr/share/fonts/ttf/.
-  sudo 7z x /usr/share/fonts/ttf/Hack.zip
+  git clone https://github.com/VaughnValle/blue-sky.git
+  sudo mkdir /usr/share/fonts/truetype
+  sudo cp blue-sky/polybar/fonts/* /usr/share/fonts/truetype/.
+  rm -rf blue-sky
+  pushd /usr/share/fonts/
+  sudo wget https://github.com/microsoft/cascadia-code/releases/download/v2407.24/CascadiaCode-2407.24.zip
+  sudo 7z x CascadiaCode-2407.24.zip
+  sleep 1
+  sudo wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/Hack.zip
+  sudo 7z x Hack.zip
+  popd
   fc-cache -v
+  git clone https://github.com/4akatun/Working-environment.git
+  git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
+  sleep 5
   git clone https://github.com/ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
   git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ~/.powerlevel10k
   sudo mkdir /usr/share/zsh/.pluginszsh
+  sleep 1 
   cd $(find / -type d -name Working-environment 2>/dev/null)
+  mkdir ~/wallpaper/
+  cp Entorno-img/1345403.jpeg ~/wallpaper/.
   cp -r backupEntorno/bin $HOME/.config/.
   cp -r backupEntorno/bspwm $HOME/.config/.
-  cp-r backupEntorno/kitty $HOME/.config/.
-  cp -r backupEntorno/nvim $HOME/.config/.
+  cp -r backupEntorno/kitty $HOME/.config/.
   cp -r backupEntorno/picom $HOME/.config/.
   cp -r backupEntorno/polybar $HOME/.config/.
   cp -r backupEntorno/sxhkd $HOME/.config/.
-  sudo cp backupEntorno/.pluginszsh/sudo.plugins.zsh /usr/share/zsh/.pluginszsh/.
-  cp backupEntorno/.zshrc $HOME/.
-  cp backupEntorno/.p10k.zsh $HOME/.
+  sudo cp -r backupEntorno/.pluginszsh/sudo.plugin.zsh /usr/share/zsh/.pluginszsh/.
+  cp  backupEntorno/.zshrc $HOME/.
+  cp  backupEntorno/.p10k.zsh $HOME/.
+  sleep 2
   sudo cp backupEntorno/nord.rasi /usr/share/rofi/themes/.
+  
   sudo usermod -s $(which zsh) $(whoami)
-  git clone --depth 1 https://github.com/junegunn/fzf.git
-~/.fzf/install
-sudo git clone --depth 1 https://github.com/junegunn/fzf.git 
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
+  sudo git clone --depth 1 https://github.com/junegunn/fzf.git 
   sudo mv fzf /root/.fzf
   sudo /root/.fzf/install
-  sleep 3
+  sleep 2
   cd 
   rm -rf ~/Descargas/Working-environment
   echo -e "\033[32m✓\033[0m Todo esta perfectamente INSTALADO es hora de resetear a la pantalla de inicio elegir BSPWM y a disfritar del entorno"
-  sleep 3
-  kill -9 -1
-
+  sleep 1
+  reboot
 
 else cat /etc/os-release | grep -q "ID=archlinux";
   echo -e "\033[32m✓\033[0m Sistema operativo basado en $(cat /etc/os-release | grep -i '^ID=' | tr '=' ' ' | awk $'{print $2}')"
@@ -76,6 +87,7 @@ else cat /etc/os-release | grep -q "ID=archlinux";
   sudo $installA --noconfirm bspwm polybar sxhkd picom kitty ranger rofi zsh zsh-syntax-highlighting zsh-autosuggestions man-db mlocate firefox  zsh-autosuggestions bat firejail flameshot neofetch feh nvim 7zip xorg-xrandr caja xorg-xinput lsd ttf-font-awesome
   sleep 1
   git clone https://github.com/VaughnValle/blue-sky.git
+  sudo mkdir /usr/share/fonts/truetype
   sudo cp blue-sky/polybar/fonts/* /usr/share/fonts/truetype/.
   rm -rf blue-sky
   pushd /usr/share/fonts/
@@ -114,7 +126,7 @@ else cat /etc/os-release | grep -q "ID=archlinux";
   
   sudo usermod -s $(which zsh) $(whoami)
   git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install
+  ~/.fzf/install
   sudo git clone --depth 1 https://github.com/junegunn/fzf.git 
   sudo mv fzf /root/.fzf
   sudo /root/.fzf/install
