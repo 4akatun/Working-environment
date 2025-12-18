@@ -1,8 +1,8 @@
 #!/bin/bash
 
-ip_address=$(cat /home/akatun/.config/bin/target | awk '{print $1}')
+ip_address=$(cat $HOME/.config/bin/target | awk '{print $1}')
 
-machine_name=$(cat /home/akatun/.config/bin/target | awk '{print $3}')
+machine_name=$(cat $HOME/.config/bin/target | awk '{print $3}')
 
 if [ $ip_address ] && [ $machine_name ]; then
 
